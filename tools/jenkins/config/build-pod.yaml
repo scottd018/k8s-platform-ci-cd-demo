@@ -5,3 +5,4 @@ spec:
     - name: kubectl-deploy
       image: bitnami/kubectl:1.20.9-debian-10-r17
       command: ["tail", "-f", "/dev/null"]  # this or any command that is bascially a noop is required, this is so that you don't overwrite the entrypoint of the base container
+
