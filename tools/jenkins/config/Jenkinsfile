@@ -1,0 +1,25 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccountName: jenkins-deploy
+  containers:
+    - name: kubectl-deploy
+      image: boxboat/kubectl:1.20.5
+      command: ["sleep", "infinity"]
+'''
+        }
+    }
+    stages {
+        stage('deploy') {
+            steps {
+                container('kubectl-deploy') {
+                    sh 'kubectl get pods -n jenkins'   
+                }
+            }
+        }
+    }
+}
