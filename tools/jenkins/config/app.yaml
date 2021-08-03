@@ -1,0 +1,23 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: jenkins
+  namespace: tkg-system
+spec:
+  fetch:
+    - git:
+        url: https://github.com/scottd018/k8s-platform-ci-cd-demo
+        ref: origin/master
+        subPath: tools/jenkins/base
+    - helmChart:
+        name: jenkins/jenkins
+        version: 3.5.9
+        repository:
+          url: https://charts.jenkins.io
+  template:
+    - helmTemplate:
+        namespace: jenkins
+        valuesFrom:
+          - path: jenkins.yaml
+  deploy:
+    - kapp: {}

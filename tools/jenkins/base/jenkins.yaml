@@ -69,12 +69,12 @@ controller:
   # initContainerEnv:
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
-  containerEnv:
-    - name: GITHUB_OAUTH_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: oauth-secrets
-          key: github-client-secret
+  # containerEnv:
+  #   - name: GITHUB_OAUTH_SECRET
+  #     valueFrom:
+  #       secretKeyRef:
+  #         name: oauth-secrets
+  #         key: github-client-secret
   # Set min/max heap here if needed with:
   # javaOpts: "-Xms512m -Xmx512m"
   # jenkinsOpts: ""
@@ -111,10 +111,10 @@ controller:
   targetPort: 8080
   # For minikube, set this to NodePort, elsewhere use LoadBalancer
   # Use ClusterIP if your setup includes ingress controller
-  serviceType: ClusterIP
+  serviceType: LoadBalancer
   # Jenkins controller service annotations
-  serviceAnnotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+  serviceAnnotations: {}
+    # service.beta.kubernetes.io/aws-load-balancer-internal: "true"
   # Jenkins controller custom labels
   statefulSetLabels: {}
   #   foo: bar
@@ -327,26 +327,26 @@ controller:
   JCasC:
     defaultConfig: true
     configScripts:
-      enable-authorization: |
-        jenkins:
-          securityRealm:
-            github:
-              clientID: "a799328bc494cd2c6192"
-              clientSecret: "${GITHUB_OAUTH_SECRET}"
-              githubApiUri: "https://api.github.com"
-              githubWebUri: "https://github.com"
-              oauthScopes: "user:email"
-          authorizationStrategy:
-            globalMatrix:
-              permissions:
-              - "Overall/Administer:DustyP53"
-              - "Overall/Administer:ericadohring"
-              - "Overall/Administer:jeffellin"
-              - "Overall/Administer:maliksalman"
-              - "Overall/Administer:pkalapala"
-              - "Overall/Administer:swathikaThiyagarajan"
-              - "Overall/Administer:venkatadonapati"
-              - "Overall/Administer:jonathannewell"
+      # enable-authorization: |
+      #   jenkins:
+      #     securityRealm:
+      #       github:
+      #         clientID: "a799328bc494cd2c6192"
+      #         clientSecret: "${GITHUB_OAUTH_SECRET}"
+      #         githubApiUri: "https://api.github.com"
+      #         githubWebUri: "https://github.com"
+      #         oauthScopes: "user:email"
+      #     authorizationStrategy:
+      #       globalMatrix:
+      #         permissions:
+      #         - "Overall/Administer:DustyP53"
+      #         - "Overall/Administer:ericadohring"
+      #         - "Overall/Administer:jeffellin"
+      #         - "Overall/Administer:maliksalman"
+      #         - "Overall/Administer:pkalapala"
+      #         - "Overall/Administer:swathikaThiyagarajan"
+      #         - "Overall/Administer:venkatadonapati"
+      #         - "Overall/Administer:jonathannewell"
       disable-user-scripts: |
         security:
           globalJobDslSecurityConfiguration:
@@ -781,7 +781,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass:
+  storageClass: jenkins
   annotations: {}
   accessMode: "ReadWriteOnce"
   size: "8Gi"
