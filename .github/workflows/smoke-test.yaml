@@ -58,3 +58,4 @@ jobs:
         name: "Run Kubectl Apply"
         shell: "bash"
         run: "kubectl apply -f components/litmus/"
+

@@ -2627,7 +2627,6 @@ spec:
       app.kubernetes.io/part-of: litmus
       app.kubernetes.io/component: experiment-job
       app.kubernetes.io/version: 1.13.8
-
 ---
 apiVersion: litmuschaos.io/v1alpha1
 description:
