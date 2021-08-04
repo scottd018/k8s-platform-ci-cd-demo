@@ -1,0 +1,55 @@
+---
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: chaos-platform
+  namespace: litmus
+spec:
+  appinfo:
+    appns: 'tkg-system'
+    applabel: 'app=kapp-controller'
+    appkind: 'deployment'
+  engineState: 'active'
+  chaosServiceAccount: litmus-test
+  experiments:
+    #
+    # TARGET POD DELETION:
+    #   One could hypothetically target the platform components here
+    #
+    - name: pod-delete
+      spec:
+        components:
+          env:
+            # set chaos duration (in sec) as desired
+            - name: TOTAL_CHAOS_DURATION
+              value: '60'
+
+            # set chaos interval (in sec) as desired
+            - name: CHAOS_INTERVAL
+              value: '10'
+              
+            # pod failures without '--force' & default terminationGracePeriodSeconds
+            - name: FORCE
+              value: 'false'
+
+    #
+    # NODE CPU HOG:
+    #   One can simulate a CPU load on a node
+    #
+    - name: node-cpu-hog
+      spec:
+        components:
+          env:
+            # set chaos duration (in sec) as desired
+            - name: TOTAL_CHAOS_DURATION
+              value: '60'
+
+            - name: NODE_CPU_CORE
+              value: '4'
+
+            - name: NODES_AFFECTED_PERC
+              value: '100'
+
+            # provide the comma separated target node names
+            - name: NODE_LABEL
+              value: 'beta.kubernetes.io/os=linux'
