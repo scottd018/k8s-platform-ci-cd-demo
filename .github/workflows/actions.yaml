@@ -1,0 +1,81 @@
+---
+name: "Lint"
+on:
+  - "push"
+  - "pull_request"
+jobs:
+  lint-manifests:
+    name: "Lint Manifests"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout Code"
+        uses: "actions/checkout@master"
+      - run: "echo lint manifests steps here"
+
+  lint-yaml:
+    name: "Lint YAML"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout Code"
+        uses: "actions/checkout@master"
+      - run: "echo lint yaml steps here"
+---
+name: "Smoke Test"
+on:
+  - "pull_request"
+jobs:
+  detect-file-changes:
+    name: "Detect File Changes"
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Checkout Code"
+        uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 2
+      - name: "Detect File Changes"
+        uses: "tj-actions/changed-files@v6.2"
+        id: "changed-files"
+      - name: "List all modified files"
+        run: |
+          for file in "${{ steps.changed-files.outputs.all_changed_files }}"; do
+            echo "$file was modified"
+          done
+    outputs:
+      changed-files: ${{ steps.changed-files.outputs.all_changed_files }}
+
+  smoke-test:
+    name: "Smoke Test: Litmus"
+    runs-on: "ubuntu-latest"
+    steps:
+      - if: "contains(needs.detect-file-changes.outputs.changed-files, 'components/litmus')"
+        name: "Setup KIND Unit Test Environment"
+        shell: "bash"
+        run: |
+          # setup kind
+          if [ -z $(which kind) ]; then
+            echo "kind executable not found...installing"
+            curl https://github.com/kubernetes-sigs/kind/releases/download/${KIND_VERSION}/kind-linux-amd64 -o /usr/local/bin/kind -L
+            chmod +x /usr/local/bin/kind
+          else
+            echo "found kind executable at $(which kind)...not installing"
+          fi
+          # setup kubectl
+          if [ -z $(which kubectl) ]; then
+            curl -LO https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl
+            chmod +x /usr/local/bin/kubectl
+          else
+            echo "found kubectl executable at $(which kubectl)...not installing"
+          fi
+        env:
+          KIND_VERSION:    "v0.10.0"
+          KUBECTL_VERSION: "v1.20.0"
+
+      - if: "contains(needs.detect-file-changes.outputs.changed-files, 'components/litmus')"
+        name: "Setup KIND Cluster"
+        shell: "bash"
+        run: "kind create cluster"
+
+      - if: "contains(needs.detect-file-changes.outputs.changed-files, 'components/litmus')"
+        name: "Run Kubectl Apply"
+        shell: "bash"
+        run: "kubectl apply -f components/litmus/"
