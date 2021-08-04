@@ -17,7 +17,7 @@ spec:
         stage('deploy') {
             steps {
                 container('kubectl-deploy') {
-                    sh 'kubectl get pods -A'
+                    sh 'kubectl apply -f components/litmus/'
                 }
             }
         }
