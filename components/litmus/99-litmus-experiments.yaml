@@ -1864,7 +1864,6 @@ spec:
     secrets:
       - name: id-rsa
         mountPath: /mnt/
-
 ---
 apiVersion: litmuschaos.io/v1alpha1
 description:
