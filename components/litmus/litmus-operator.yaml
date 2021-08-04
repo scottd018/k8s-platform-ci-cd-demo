@@ -442,11 +442,9 @@ spec:
                                   key:
                                     type: string
                                     minLength: 1
-                                    allowEmptyValue: false
                                   value:
                                     type: string
                                     minLength: 1
-                                    allowEmptyValue: false
                             experimentImage:
                               type: string
                             env:
@@ -590,11 +588,9 @@ spec:
                                   key:
                                     type: string
                                     minLength: 1
-                                    allowEmptyValue: false
                                   value:
                                     type: string
                                     minLength: 1
-                                    allowEmptyValue: false
                             tolerations:
                               description: Pod's tolerations.
                               items:
