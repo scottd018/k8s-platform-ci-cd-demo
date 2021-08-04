@@ -1,25 +1,4 @@
 ---
-name: "Lint"
-on:
-  - "push"
-  - "pull_request"
-jobs:
-  lint-manifests:
-    name: "Lint Manifests"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "Checkout Code"
-        uses: "actions/checkout@master"
-      - run: "echo lint manifests steps here"
-
-  lint-yaml:
-    name: "Lint YAML"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "Checkout Code"
-        uses: "actions/checkout@master"
-      - run: "echo lint yaml steps here"
----
 name: "Smoke Test"
 on:
   - "pull_request"
