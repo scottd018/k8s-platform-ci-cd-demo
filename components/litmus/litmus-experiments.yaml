@@ -5,6 +5,7 @@ description:
     Drain the node where application pod is scheduled
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-drain
   labels:
     name: node-drain
@@ -87,6 +88,7 @@ description:
     Give a memory hog on a node belonging to a deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-memory-hog
   labels:
     name: node-memory-hog
@@ -192,6 +194,7 @@ description:
     Pod DNS Spoof can spoof particular dns requests in target pod container to desired target hostnames
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-dns-spoof
   labels:
     name: pod-dns-spoof
@@ -291,6 +294,7 @@ description:
     Injects network packet loss on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-network-loss
   labels:
     name: pod-network-loss
@@ -413,6 +417,7 @@ description:
     Kills the kubelet service on the application node to check the resiliency.
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: kubelet-service-kill
   labels:
     name: kubelet-service-kill
@@ -494,6 +499,7 @@ description:
     poweroff node
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-poweroff
   labels:
     name: node-poweroff
@@ -589,6 +595,7 @@ description:
   message: "Kills a container belonging to an application pod \n"
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: container-kill
   labels:
     name: container-kill
@@ -700,6 +707,7 @@ description:
     Taint the node where application pod is scheduled
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-taint
   labels:
     name: node-taint
@@ -788,6 +796,7 @@ description:
     Deletes a pod belonging to a deployment/statefulset/daemonset
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: k8-pod-delete
   labels:
     name: k8-pod-delete
@@ -873,6 +882,7 @@ description:
     Injects network latency on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-network-latency
   labels:
     name: pod-network-latency
@@ -995,6 +1005,7 @@ description:
     Scale the application replicas and test the node autoscaling on cluster
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-autoscaler
   labels:
     name: pod-autoscaler
@@ -1078,6 +1089,7 @@ description:
     Injects memory consumption on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-memory-hog-exec
   labels:
     name: pod-memory-hog-exec
@@ -1168,6 +1180,7 @@ description:
     Detaching a persistent disk from a node/instance. Supports only for AWS and GCP
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: disk-loss
   labels:
     name: disk-loss
@@ -1259,6 +1272,7 @@ description:
     Injects cpu consumption on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-cpu-hog
   labels:
     name: pod-cpu-hog
@@ -1366,6 +1380,7 @@ description:
     IO stress on a app pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-io-stress
   labels:
     name: pod-io-stress
@@ -1479,6 +1494,7 @@ description:
     Pod DNS Error injects dns failure/error in target pod containers
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-dns-error
   labels:
     name: pod-dns-error
@@ -1582,6 +1598,7 @@ description:
     Give a cpu spike on a node belonging to a deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-cpu-hog
   labels:
     name: node-cpu-hog
@@ -1679,6 +1696,7 @@ description:
     Kills the docker service on the application node to check the resiliency.
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: docker-service-kill
   labels:
     name: docker-service-kill
@@ -1760,6 +1778,7 @@ description:
     Restart node
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-restart
   labels:
     name: node-restart
@@ -1853,6 +1872,7 @@ description:
     Give IO disk stress on a node belonging to a deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: node-io-stress
   labels:
     name: node-io-stress
@@ -1967,6 +1987,7 @@ description:
     Inject network packet corruption into application pod
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-network-corruption
   labels:
     name: pod-network-corruption
@@ -2089,6 +2110,7 @@ description:
     Injects cpu consumption on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-cpu-hog-exec
   labels:
     name: pod-cpu-hog-exec
@@ -2178,6 +2200,7 @@ description:
     Injects network packet duplication on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-network-duplication
   labels:
     name: pod-network-duplication
@@ -2297,6 +2320,7 @@ description:
     Deletes a pod belonging to a deployment/statefulset/daemonset
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-delete
   labels:
     name: pod-delete
@@ -2390,6 +2414,7 @@ description:
     Injects memory consumption on pods belonging to an app deployment
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: pod-memory-hog
   labels:
     name: pod-memory-hog
@@ -2500,6 +2525,7 @@ description:
     Fillup Ephemeral Storage of a Resource
 kind: ChaosExperiment
 metadata:
+  namespace: litmus
   name: disk-fill
   labels:
     name: disk-fill
