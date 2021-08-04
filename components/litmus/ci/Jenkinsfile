@@ -9,6 +9,7 @@ pipeline {
                 best practices
         */
         stage('lint') {
+            when { changeset 'components/litmus/*' }
             parallel {
                 stage('lint-yaml') {
                     steps {
@@ -27,6 +28,7 @@ pipeline {
           testing: ensure manifests will deploy to kubernetes
         */
         stage('smoke-test') {
+            when { changeset 'components/litmus/*' }
             parallel {
                 stage('kind-test') {
                     steps {
