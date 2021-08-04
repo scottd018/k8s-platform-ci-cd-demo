@@ -15,6 +15,7 @@ spec:
     }
     stages {
         stage('deploy') {
+            when { changeset "components/litmus/*" }
             steps {
                 container('kubectl-deploy') {
                     sh 'kubectl apply -f components/litmus/'
