@@ -14,7 +14,9 @@ spec:
     - ytt:
         ignoreUnknownComments: true
         paths:
-          - litmus-test-rbac.yaml
-          - litmus-operator.yaml
+          - 01-litmus-namespace.yaml
+          - 02-litmus-test-rbac.yaml
+          - 03-litmus-operator.yaml
+          - 99-litmus-experiments.yaml
   deploy:
     - kapp: {}
