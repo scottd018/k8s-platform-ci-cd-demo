@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+        #
+        # linting: ensure yaml manifests match expected format
+        #   - yamllint: (https://github.com/adrienverge/yamllint) ensures the YAML matches the expected format
+        #   - kubelinter: (https://github.com/stackrox/kube-linter) ensures the kubernetes manifests adhere to org
+        #       best practices
+        #
+        stage('lint') {
+            parallel {
+                stage('lint-yaml') {
+                    steps {
+                        sh 'echo lint yaml steps here'
+                    }
+                }
+                stage('lint-manifests') {
+                    steps {
+                        sh 'echo lint manifests steps here'
+                    }
+                }
+            }
+        }
+
+        #
+        # testing: ensure manifests will deploy to kubernetes
+        #
+        stage('smoke-test') {
+            parallel {
+                stage('kind-test') {
+                    steps {
+                        sh 'echo kind deployment here'
+                    }
+                }
+            }
+        }
+    }
+}
