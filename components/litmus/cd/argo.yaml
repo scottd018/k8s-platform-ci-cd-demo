@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: litmus
+  namespace: argo
+spec:
+  destination:
+    namespace: litmus
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: components/litmus
+    repoURL: https://github.com/scottd018/k8s-platform-ci-cd-demo
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - ApplyOutOfSyncOnly=true
