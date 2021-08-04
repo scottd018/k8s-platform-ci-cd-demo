@@ -165,6 +165,13 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "chaos-operator"
+          resources:
+            requests:
+              memory: 512Mi
+              cpu: 1000m
+            limits:
+              memory: 1024Mi
+              cpu: 1500m
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition

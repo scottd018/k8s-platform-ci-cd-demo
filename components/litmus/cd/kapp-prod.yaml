@@ -1,0 +1,22 @@
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: litmus
+  namespace: tkg-system
+spec:
+  serviceAccountName: kapp-controller-deploy
+  fetch:
+    - git:
+        url: https://github.com/scottd018/k8s-platform-ci-cd-demo
+        ref: origin/prod
+        subPath: components/litmus
+  template:
+    - ytt:
+        ignoreUnknownComments: true
+        paths:
+          - 01-litmus-namespace.yaml
+          - 02-litmus-test-rbac.yaml
+          - 03-litmus-operator.yaml
+          - 99-litmus-experiments.yaml
+  deploy:
+    - kapp: {}
