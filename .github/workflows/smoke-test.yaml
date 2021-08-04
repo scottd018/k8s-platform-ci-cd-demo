@@ -28,6 +28,10 @@ jobs:
     needs: "detect-file-changes"
     steps:
       - if: "contains(needs.detect-file-changes.outputs.changed-files, 'components/litmus')"
+        name: "Checkout Code"
+        uses: "actions/checkout@v2"
+
+      - if: "contains(needs.detect-file-changes.outputs.changed-files, 'components/litmus')"
         name: "Setup KIND Unit Test Environment"
         shell: "bash"
         run: |
