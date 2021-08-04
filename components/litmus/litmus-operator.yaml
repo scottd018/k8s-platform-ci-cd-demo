@@ -17,6 +17,7 @@ metadata:
     app.kubernetes.io/component: operator-serviceaccount
     app.kubernetes.io/part-of: litmus
     app.kubernetes.io/managed-by: kubectl
+    test: label
     name: litmus
 ---
 apiVersion: rbac.authorization.k8s.io/v1
