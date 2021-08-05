@@ -170,7 +170,7 @@ spec:
               memory: 512Mi
               cpu: 1000m
             limits:
-              memory: 1024Mi
+              memory: 2048Mi
               cpu: 1501m
 ---
 apiVersion: apiextensions.k8s.io/v1

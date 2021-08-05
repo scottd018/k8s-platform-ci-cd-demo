@@ -53,3 +53,28 @@ spec:
             # provide the comma separated target node names
             - name: NODE_LABEL
               value: 'beta.kubernetes.io/os=linux'
+
+    #
+    # NODE MEMORY HOG:
+    #   One can simulate a memory load on a node
+    #
+    - name: node-memory-hog
+      spec:
+        components:
+          env:
+            # set chaos duration (in sec) as desired
+            - name: TOTAL_CHAOS_DURATION
+              value: '60'
+
+            - name: MEMORY_CONSUMPTION_MEBIBYTES
+              value: '16000'
+
+            - name: NUMBER_OF_WORKERS
+              value: '16'
+
+            - name: NODES_AFFECTED_PERC
+              value: '100'
+
+            # provide the comma separated target node names
+            - name: NODE_LABEL
+              value: 'beta.kubernetes.io/os=linux'
